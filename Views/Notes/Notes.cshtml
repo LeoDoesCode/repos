@@ -1,0 +1,120 @@
+﻿@{
+    /**/
+
+
+    if (Request.HttpMethod != "POST")
+    {
+
+
+        ViewData["S_Result_Notes"] = "Showing 10 most recent notes unrelated to any projects.";
+    }
+
+}
+
+<h3> <span class="glyphicon glyphicon-list-alt"></span> Your Notes</h3>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addnote">Add one</button>
+@{Html.RenderPartial("~/Views/AddNote/AddNote.cshtml"); }
+@{Html.RenderPartial("~/Views/EditNote/EditNote.cshtml"); }
+@using (Html.BeginForm("Notes", "Notes", FormMethod.Post))
+{
+    <br />
+    <p>
+        <span class="glyphicon glyphicon-search"></span>
+        SEARCH: @Html.TextBox("tb", "")
+    </p>
+
+    <p> @ViewData["S_Result_Notes"] </p>
+
+
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <span class="glyphicon glyphicon-plus"> </span> More Options
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+
+
+                    @{var typelist = Whiteboard.Helpers.Login.GetSkillTypes();}
+                    <span>
+                        Skill:
+                        <select id="lbtypes" name="lbtypes">
+                            <option>--</option>
+                            @foreach (Whiteboard.Models.SkillTypes st in typelist)
+                            {
+                                <option> @st.Name</option>
+                            }
+                        </select>
+                    </span>
+                    <br /><br />
+                    <p>
+                        <text> Start date </text>
+                        <input type="date" name="day" value="start">
+                    </p>
+                    <p>
+                        <text> End date </text>
+                        <input type="date" name="day2" value="finish">
+                    </p>
+                    <p id="moreNotes">Show: <select id="amount" name="amount"><option>10</option><option>20</option><option>30</option><option>40</option></select> </p>
+
+                    <p>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input class="btn btn-default" type="submit" value="Search" />
+
+
+
+
+}
+
+@{
+    List<Whiteboard.Models.Notes> notelist = new List<Whiteboard.Models.Notes>();
+
+    if (ViewData["NoteSeek"] == null)
+    {
+        notelist = Whiteboard.Helpers.Seek.Notes();
+    }
+    else
+    {
+        notelist = (List<Whiteboard.Models.Notes>)ViewData["NoteSeek"];
+
+    }
+
+    if (notelist.Count != 0)
+    {
+        foreach (Whiteboard.Models.Notes NT in notelist)
+        {
+            <p id="notes">
+                <span hidden id="PID">@NT.ID</span>
+                <span id="ndate_@NT.ID">@NT.Date.ToString("dd/MM/yyyy")</span> <span id="nname_@NT.ID"> @NT.Name </span>
+                <a href="#" id="@NT.ID" data-toggle="modal" data-target="#editnote" data-id="editnote" title="@NT.ID"><span class="edit glyphicon glyphicon-pencil"></span></a>
+            <p>
+                @{
+                    <span hidden id="fulldesc_@NT.ID"> @NT.Description </span>
+                    if (NT.Description.Length > 50)
+                    {
+
+                        <span> @(NT.Description.Substring(0, 30) + "(...)");</span>
+                    }
+                }
+            </p>
+            </p>
+
+        }
+    }
+    else
+    {
+        <p id="nothingProj"> Nothing to see here.</p>
+    }
+
+
+
+
+}

@@ -1,0 +1,31 @@
+﻿
+
+<div class="modal fade" id="note2proj" tabindex="-1" role="dialog" aria-labelledby="note2proj" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span hidden name="projnote" id="projnote"></span>
+                <span class="modal-title titletext">New Note</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("AddNote", "AddNote", FormMethod.Post))
+            {
+                <div class="modal-body">
+                    <p>
+                        <input type="text" name="name" id="noteprojtitle" maxlength="50" />
+                    </p>
+                    <p>
+                        <textarea name="desc" cols="200" rows="10" id="noteprojtext" maxlength="500"> </textarea>
+                    </p>
+
+                </div>
+                <div class="modal-footer">
+                    <input class="btn btn-primary" type="submit" value="Add Note" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

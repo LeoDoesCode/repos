@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Home";
+    
+    Whiteboard.Models.User SessionUser = Whiteboard.Helpers.Login.GetUserModel();
+}
+<div class="row">
+
+    <div class="col-md-2">
+        <div id="userpage">
+            @{Html.RenderPartial("~/Views/User/User.cshtml", SessionUser);}
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        @{Html.RenderPartial("~/Views/Project/Project.cshtml");}
+    </div>
+
+    <div class="col-md-2">
+        @{Html.RenderPartial("~/Views/Reminders/Reminders.cshtml");}
+        @{Html.RenderPartial("~/Views/Notes/Notes.cshtml");}
+    </div>
+</div>

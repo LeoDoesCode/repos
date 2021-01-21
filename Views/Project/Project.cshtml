@@ -1,0 +1,132 @@
+﻿
+
+
+    @{
+        var user = Whiteboard.Helpers.Login.GetUserModel();
+        if (Request.HttpMethod != "POST")
+        {
+            ViewData["S_Result"] = "Showing 10 most recent projects.";
+        }
+
+    }
+
+    <div id="skills">
+        <h3> <span class="glyphicon glyphicon-wrench"> </span> Here's your Toolkit: </h3>
+
+        <div id="userskills">
+            @if (user.Skills.Count != 0)
+            {
+                foreach (Whiteboard.Models.UserSkills i in user.Skills)
+                {
+            <div class="allskills">
+                <div class="userskillsone">
+                    <a href="#" name="@(i.ID)" title="Click me to edit level" data-toggle="modal" data-target="#editskill" id="@(i.ID)" data-id="editskill">
+                        <img src="~/Resources/SkillsIMG/@(i.ID).png" />
+                        <div class="progress">
+                            <div id="progbar_@i.ID" class="progress-bar" role="progressbar" style="width: @i.Level%" aria-valuenow="@i.Level" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+
+                }
+                <div class="separator"><a data-toggle="modal" data-target="#addskills" href="#" id="addskills" data-id="addskills" class="btn btn-default">Add skill</a></div>
+                Html.RenderPartial("~/Views/EditSkill/EditSkill.cshtml");
+                Html.RenderPartial("~/Views/AddSkills/AddSkills.cshtml");
+
+
+            }
+            else
+            {
+                <p id="cricket">*cricket noise*</p> <span>Overall:</span><p id="totalskills"> 0 Skills. It's ok, it's not too late to stop being useless.</p>
+            }
+
+        </div>
+
+    </div>
+
+
+        <h3> <span class="glyphicon glyphicon-flag"> </span> Projects: </h3>
+        <div id="projects">
+            @{Html.RenderPartial("~/Views/AddProj/AddProj.cshtml"); }
+            @{Html.RenderPartial("~/Views/EditProject/EditProject.cshtml");}
+            @using (Html.BeginForm("Project", "Project", FormMethod.Post))
+            {
+
+                <p> @ViewData["S_Result"] </p>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addproj">Add one</button>
+                <input class="btn btn-default" type="submit" value="Search" />
+                <br /> <br />
+                <p><span class="glyphicon glyphicon-search"></span> SEARCH: @Html.TextBox("tb", "")</p>
+
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <span class="glyphicon glyphicon-plus"> </span> More Options
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#collapseOne">
+                            <div class="card-body">
+
+                                @{var typelist = Whiteboard.Helpers.Login.GetSkillTypes(); }
+                                <span>
+                                    Skills:
+                                    <select id="lbtypes" name="lbtypes">
+                                        <option>--</option>
+                                        @foreach (Whiteboard.Models.SkillTypes st in typelist)
+                                        {
+                                            <option> @st.Name</option>
+                                        }
+                                    </select>
+                                </span>
+                                <p>
+                                    <text> Start date </text>
+                                    <input type="date" name="day" value="start">
+                                    <text> End date </text>
+                                    <input type="date" name="day2" value="finish">
+                                </p>
+                                <p id="moreProj">Show: <select id="amount" name="amount"><option>10</option><option>20</option><option>30</option><option>40</option></select> </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                List<Whiteboard.Models.Project>
+                    currentList = new List<Whiteboard.Models.Project>
+                        ();
+                if (ViewData["PJSeek"] == null)
+                {
+                    currentList = Whiteboard.Helpers.Seek.Projects();
+                }
+                else
+                {
+                    currentList = (List<Whiteboard.Models.Project>
+                        )ViewData["PJSeek"];
+                }
+
+                if (currentList.Count != 0)
+                {
+                    foreach (Whiteboard.Models.Project PJ in currentList)
+                    {
+                        <p id="pjs">
+                            <span hidden id="pid@{PJ.ID.ToString();}">@PJ.ID</span> <span hidden id="pdesc@{@PJ.ID;}">@PJ.Description</span> <span id="pdate@{@PJ.ID;}"> @PJ.Date.ToString("dd/MM/yyyy") </span> <span id="pname@{@PJ.ID;}">@PJ.Name</span> <a data-toggle="modal" data-target="#EditProject" href="#" id="editproj" data-id="editproj" title="@PJ.ID"><span class="edit glyphicon glyphicon-pencil"></span></a> <a data-toggle="modal" data-target="#note2proj" href="#" id="note2proj" data-id="note2proj" title="@PJ.ID"><span class="glyphicon glyphicon-file"></span></a>
+                            <span id="skillimgp@{PJ.ID.ToString();}">
+                                &nbsp;
+                                @{foreach (Whiteboard.Models.Skills skill in PJ.Skills)
+                                    {
+                                        <span id="@skill.ID"><img style="width:18px" src="~/Resources/SkillsIMG/@(skill.ID).png" title=@(skill.Name) /></span>
+                                    }
+                                }
+                            </span>
+                        </p>
+                    }
+                }
+                else
+                {<p id="nothingProj">Nothing to see here. Maybe you should be working a little harder, hmm?</p>}
+            }
+
+
+        </div>

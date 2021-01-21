@@ -1,0 +1,52 @@
+﻿
+<div class="modal fade" id="editnote" tabindex="-1" role="dialog" aria-labelledby="editnote" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title titletext">Edit Note</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("EditNote", "EditNote", FormMethod.Post))
+            {
+                <input hidden id="editnoteid" name="editnoteid"> 
+                <div class="modal-body">
+                    <p>
+                        <input type="text" name="name" id="editnotetitle" maxlength="50" />
+                    </p>
+                    <div class="areawrapper">
+                        <textarea name="desc" cols="200" rows="10" id="editnotetext" maxlength="500"> </textarea>
+                    </div>
+                    <p>
+                        <div id="accordion">
+                            <div class="card">
+                                <div class="card-header" id="headingeditnote">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseeditnote" aria-expanded="true" aria-controls="collapseeditnote">
+                                            <span class="glyphicon glyphicon-wrench"> </span> Associated Skills
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseeditnote" class="collapse" aria-labelledby="headingeditnote" data-parent="#collapseeditnote">
+                                    <div class="card-body">
+                                        @{Html.RenderPartial("~/Views/SkillPicker.cshtml"); }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </p>
+
+                    <br />
+
+                </div>
+                <div class="modal-footer">
+                    <input class="btn btn-primary" type="submit" value="Save" name="command" />
+                    <input class="btn btn-primary" type="submit" value="Delete" name="command" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

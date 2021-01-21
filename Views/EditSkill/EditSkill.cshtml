@@ -1,0 +1,40 @@
+﻿<div class="modal fade" id="editskill" tabindex="-1" role="dialog" aria-labelledby="editskill" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title titletext">Edit Skill</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("EditSkill", "EditSkill", FormMethod.Post))
+            {
+            <div class="modal-body">
+                <input hidden id="editskillid" name="editskillid">
+                <img src="" style="width: 85px; height: 85px;" id="editskillimg"/>
+                <br /><br />
+                User level:
+                      <select id="lbeditlevel" name="lblevel">
+                          <option>0</option>
+                          <option>10</option>
+                          <option>20</option>
+                          <option>30</option>
+                          <option>40</option>
+                          <option>50</option>
+                          <option>60</option>
+                          <option>70</option>
+                          <option>80</option>
+                          <option>90</option>
+                          <option>100</option>
+                      </select>
+                <br /> <br />
+            </div>
+            <div class="modal-footer">
+                <input class="btn btn-primary" type="submit" value="Save" name="command"/>
+                <input class="btn btn-primary" type="submit" value="Delete" name="command"/>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            }
+        </div>
+    </div>
+</div>

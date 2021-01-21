@@ -1,0 +1,33 @@
+﻿
+
+<div class="modal fade" id="addrem" tabindex="-1" role="dialog" aria-labelledby="addrem" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title titletext">New Reminder</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("AddRem", "AddRem", FormMethod.Post))
+            {
+            <div class="modal-body">
+                <p>
+                    <input type="text" name="name" />
+                </p>
+                <p>
+                    <textarea name="desc" cols="200" rows="10"> </textarea>
+                </p>
+
+                Due Date:
+                <input type="date" name="newremdate" value="start"> <input type="time" id="appt" name="appt" />
+
+            </div>
+                <div class="modal-footer">
+                    <input class="btn btn-primary" type="submit" value="Add Reminder" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

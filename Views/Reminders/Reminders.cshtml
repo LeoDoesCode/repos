@@ -1,0 +1,33 @@
+﻿@{
+    var result = Whiteboard.Helpers.Login.GetUserReminders();
+<div id="reminders">
+    <h3> <span class="glyphicon glyphicon-flash"></span>  Reminders</h3>
+
+    <input class="btn btn-default" type="submit" value="Show All" /> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addrem">Add one</button>
+    @{Html.RenderPartial("~/Views/AddRem/AddRem.cshtml"); }
+    @foreach (Whiteboard.Models.Reminders rem in result)
+    {
+        <span hidden="hidden">@rem.ID</span>
+        if (rem.DueDate.Date == DateTime.Today.Date)
+        {
+            <h4 class="today"> @rem.DueDate </h4>
+        }
+        else
+        {
+            <h4> @rem.DueDate </h4>
+        }
+        <p> <b>@rem.Name </b></p>
+        <p> @rem.Description </p>
+        using (Html.BeginForm("Reminders", "Reminders", FormMethod.Post))
+        {
+            <button href="#" id="@rem.ID" data-toggle="modal" data-target="#delrem" data-id="delrem" name="delrem" value="@rem.ID" type="submit"><p class="glyphicon glyphicon-trash"></p></button>
+        }
+        }
+
+        @{
+            if (result.Count() == 0)
+            { <p id="nothingRem">Nothing to see here, today.</p> }
+        }
+
+    </div>
+}

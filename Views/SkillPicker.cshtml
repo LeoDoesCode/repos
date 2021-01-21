@@ -1,0 +1,15 @@
+﻿
+                @{ List<Whiteboard.Models.Skills> lst = Whiteboard.Helpers.Login.GetSkills();
+                    int i = 0;
+                    foreach (Whiteboard.Models.Skills sk in lst)
+                    {
+                        if (sk.Type != i)
+                        {
+                            i = sk.Type;
+                            <h5 class="typeheader"> @Html.Raw(Whiteboard.Helpers.Login.GetNameOfType(i))</h5>
+                            // generate getdbdata for GetSkillTypeName from Stored Procedures to create headings
+                        }
+                        <input type="checkbox" name="@sk.Name" value="@sk.ID"> <span> @sk.Name </span>
+                    }
+                }
+

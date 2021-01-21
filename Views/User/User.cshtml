@@ -1,0 +1,11 @@
+﻿@model Whiteboard.Models.User
+
+<div id="user">
+    <h3 name="h3username"> <span class="glyphicon glyphicon-user"></span> @Session["name"].ToString()</h3>
+    <img id="userPic" src="~/Resources/UserIMG/@(Session["user"].ToString() + ".png")" width="100px" />
+    <br /><br />
+    <h4>Intro</h4>
+    <p id="userDesc">@Html.DisplayFor(model => model.Intro) <span class="glyphicon glyphicon-pencil"></span></p>
+</div>
+
+
