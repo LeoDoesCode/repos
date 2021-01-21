@@ -1,0 +1,209 @@
+﻿body {
+    color: #383838;
+    padding-bottom: 20px;
+    background-color: #f0f0f0;
+}
+
+.titletext {
+    font-size: 18px;
+}
+
+#userDesc {
+    width:  800px;
+}
+
+h5 {
+    color: #3c7491;
+}
+
+textarea {
+    max-width: 100%;
+    border: 1px solid lightgrey;
+}
+
+.areawrapper {
+    width: 100%;
+    padding: 3px;
+}
+
+.notes a {
+    color: black;
+}
+.notestitle {
+    color: #3c7491;
+}
+
+#reminders {
+    padding-bottom: 20px;
+
+}
+    #reminders h4 {
+        color: #337ab7;
+    }
+
+h4 today {
+    color: #0c3f91;
+}
+
+#skills img{
+    height: 50px;
+    padding: 1px;
+}
+
+input[type=text] {
+    background: none;
+    border: none;
+    border-bottom: 2px solid #5fbae9;
+}
+#userskills p{
+    padding-bottom: 20px;
+}
+
+#userskills img{
+    padding: 5px;
+}
+
+.userskillsone {
+    padding-right: 10px;
+    float: left;
+    text-align: center;
+    width: 85px;
+}
+
+
+
+.progress {
+    background: lightblue;
+    background-color: grey;
+    border: grey;
+}
+
+.edit{
+    padding-top: 10px;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #3299a8; /*Sets the text hover color on navbar*/
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active >
+a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #3299a8; /*BACKGROUND color for active*/
+    background-color: #fcfcfc;
+}
+
+.navbar-default {
+    background-color: #fcfcfc;
+    border-color: #fcfcfc;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+    color: #305f78;
+    text-decoration: none;
+    background-color: #fcfcfc; /*change color of links in drop down here*/
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+    text-decoration: none;
+    background-color: #fcfcfc; /*Change rollover cell color here*/
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #305f78; /*Change active text color here*/
+}
+
+.navbar-default .navbar-brand {
+    color: #305f78;
+}
+
+.navbar .navbar-brand:hover,
+.navbar .navbar-brand:focus {
+    background-color: transparent;
+    color: #3299a8;
+}
+
+
+#user {
+    padding-bottom: 10px;
+}
+
+#projects {
+    line-height: 25px;
+    padding-bottom: 10px;
+}
+#allskills {
+    overflow: auto;
+}
+
+#userskills {
+    max-width: 800px;
+    overflow: auto;
+}
+
+#separator {
+    padding: 50px;
+    overflow: auto;
+}
+
+
+#inspirational{
+    position: relative;
+}
+
+
+
+
+
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select {
+    max-width: 300px;
+}
+
+modal-body input {
+    max-width: 300px;
+    width: 300px;
+}
+
+
+
+h2 {
+    color: #305f78;
+}
+
+h3 {
+    color: #305f78;
+}
+
+.myForm {
+    min-width: 500px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem
+}
+
+@media (max-width: 500px) {
+    .myForm {
+        min-width: 90%;
+    }
+}
